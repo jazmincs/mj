@@ -7,7 +7,7 @@ canvas.width = width;
 canvas.height = height;
 
 const text = 'Te amo ❤️'; // Texto completo con corazón
-const fontSize = 30;
+const fontSize = 40;
 const columns = Math.floor(width / fontSize);
 const drops = [];
 
